@@ -2,6 +2,10 @@
 
 namespace Ms\General\Sale\Order;
 
+use Bitrix\Main\Engine\CurrentUser;
+use Bitrix\Sale\Order;
+use Ms\General\Orm\OrderDataTable;
+
 class Data {
 
     private int $orderId;
@@ -18,11 +22,11 @@ class Data {
 
     static function getInstance(
 
-        \Bitrix\Sale\Order|string|int $order,
+        Order|string|int $order,
 
     ) {
 
-        if ($order instanceof \Bitrix\Sale\Order) {
+        if ($order instanceof Order) {
 
             $orderId = $order->getId();
         }
@@ -57,7 +61,7 @@ class Data {
 
         if (!$json) {
 
-            $valBeforeSave = \Ms\General\Orm\OrderDataTable::query()
+            $valBeforeSave = OrderDataTable::query()
                 ->setSelect(['data'])
                 ->where('orderId', '=', $this->orderId)
                 ->fetch()['data'];
@@ -70,7 +74,7 @@ class Data {
                         __LINE__,
                         'orderId' => $this->orderId,
                         '$valBeforeSave' => $valBeforeSave,
-                        'CurrentUser::get()->getId()' => \Bitrix\Main\Engine\CurrentUser::get()->getId(),
+                        'CurrentUser::get()->getId()' => CurrentUser::get()->getId(),
                         '$_SERVER' => $_SERVER,
                         'debug_backtrace' => debug_backtrace(),
                     ],
@@ -81,7 +85,7 @@ class Data {
 
         $connection = \Bitrix\Main\Application::getConnection();
 
-        $sqlInsert = "insert into " . \Ms\General\Orm\OrderDataTable::getTableName() . " (
+        $sqlInsert = "insert into " . OrderDataTable::getTableName() . " (
             orderId,
             data
         )
@@ -114,7 +118,7 @@ class Data {
 
             $this->setBase((array) json_decode(
 
-                \Ms\General\Orm\OrderDataTable::query()
+                OrderDataTable::query()
                     ->setSelect(['data'])
                     ->where('orderId', '=', $this->orderId)
                     ->fetch()['data'],
