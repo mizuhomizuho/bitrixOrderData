@@ -25,6 +25,9 @@ $meow = \Ms\General\Sale\Order\Data::getInstance(88888888)
 ```
 
 ```php
+
+// Тут сокращаем количество запросов к базе
+
 $dataObj = \Ms\General\Sale\Order\Data::getInstance($order);
 
 if (!$dataObj->isBaseLoaded()) {
@@ -36,8 +39,6 @@ if (!$dataObj->isBaseLoaded()) {
 
 $dataObjNoSaveBu = $dataObj->getNoSave();
 $dataObj->setNoSave(true);
-
-$meow = $dataObj->get('meow');
 
 $dataObj->set('meow', 8)->save();
 $dataObj->set('meow-meow', 88);
