@@ -2,9 +2,11 @@
 
 namespace Ms\General\Sale\Order;
 
+use Bitrix\Main\Application;
 use Bitrix\Main\Engine\CurrentUser;
 use Bitrix\Sale\Order;
 use Ms\General\Orm\OrderDataTable;
+use Ms\General\Site\Log\Dev;
 
 class Data {
 
@@ -68,7 +70,7 @@ class Data {
 
             if ($valBeforeSave) {
 
-                (new \Ms\General\Site\Log\Dev('clearNoClearOrderData'))->add(
+                (new Dev('clearNoClearOrderData'))->add(
                     [
                         __FILE__,
                         __LINE__,
@@ -83,7 +85,7 @@ class Data {
             }
         }
 
-        $connection = \Bitrix\Main\Application::getConnection();
+        $connection = Application::getConnection();
 
         $sqlInsert = "insert into " . OrderDataTable::getTableName() . " (
             orderId,
