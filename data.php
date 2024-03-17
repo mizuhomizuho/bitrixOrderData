@@ -78,7 +78,7 @@ class Data {
                         '$valBeforeSave' => $valBeforeSave,
                         'CurrentUser::get()->getId()' => CurrentUser::get()->getId(),
                         '$_SERVER' => $_SERVER,
-                        'debug_backtrace' => debug_backtrace(),
+                        'debug_backtrace' => \Ms\General\Site\Log\Dev::getDebugBacktracePrint(),
                     ],
                     'evgeny.babyuk@mi-shop.com',
                 );

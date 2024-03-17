@@ -1,11 +1,9 @@
 # bitrixOrderData
 
-Простой класс реализует запись json данных по заказам
-в отдельную табличку.
+A simple class implements recording json data for orders
+in a separate plate.
 
 ```sql
--- mi_sale_order_data определение
-
 CREATE TABLE `mi_sale_order_data` (
   `orderId` int(11) NOT NULL,
   `data` mediumtext DEFAULT NULL,
@@ -13,7 +11,7 @@ CREATE TABLE `mi_sale_order_data` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 ```
 
-Примеры:
+### Examples:
 
 ```php
 $meow = \Ms\General\Sale\Order\Data::getInstance(88888888)
@@ -25,8 +23,7 @@ $meow = \Ms\General\Sale\Order\Data::getInstance(88888888)
 ```
 
 ```php
-
-// Тут сокращаем количество запросов к базе
+// Here we reduce the number of queries to the database
 
 $dataObj = \Ms\General\Sale\Order\Data::getInstance($order);
 
